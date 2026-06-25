@@ -151,17 +151,6 @@ export function AuthView() {
           </button>
         </div>
 
-        {/* Public Showcase Redirect */}
-        <div className="text-center mt-4">
-          <button
-            type="button"
-            onClick={() => navigate('/showcase')}
-            className="text-[10px] uppercase tracking-widest font-extrabold text-neutral-400 hover:text-neutral-600 transition-colors"
-            disabled={submitting}
-          >
-            🌍 View Public Showcase Portfolio
-          </button>
-        </div>
 
       </div>
     </div>

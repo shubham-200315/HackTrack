@@ -7,9 +7,11 @@ import { HackathonWizard } from './components/HackathonWizard';
 import { HackathonDetailView } from './components/HackathonDetailView';
 import { DashboardGrid } from './components/DashboardGrid';
 import { ActionDropdown } from './components/ActionDropdown';
+import { useAuth } from './context/AuthContext';
 import type { Hackathon, Round } from './hooks/useDashboardData';
 
 export default function App() {
+  const { user } = useAuth();
   const {
     activeView,
     setActiveView,
@@ -278,15 +280,17 @@ export default function App() {
             <p className="text-xs text-neutral-500 mt-1">A polished record of your hackathon outcomes and project submissions.</p>
           </div>
 
-          {/* Developer profile mock banner */}
+          {/* Developer profile banner */}
           <div className="bg-white border border-neutral-200 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-premium">
             <div className="flex items-center gap-4">
               <div className="h-16 w-16 bg-brand-600 text-white font-extrabold rounded-2xl flex items-center justify-center text-2xl shadow-premium">
-                JD
+                {user?.name
+                  ? user.name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase()
+                  : 'US'}
               </div>
               <div>
-                <h3 className="text-lg font-bold text-neutral-950">John Doe</h3>
-                <p className="text-xs text-neutral-500">Full-Stack Engineer & AI Agent Architect</p>
+                <h3 className="text-lg font-bold text-neutral-950">{user?.name || 'Developer Workspace'}</h3>
+                <p className="text-xs text-neutral-500">Personal Hackathon Chronicles</p>
                 <div className="flex gap-2 mt-2">
                   <span className="bg-brand-50 text-brand-700 text-[10px] font-bold px-2 py-0.5 rounded border border-brand-100">
                     🏆 {metrics.winRate}% Success Rate
